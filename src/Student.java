@@ -3,9 +3,9 @@ public class Student
     int numarMatricol;
     String prenume;
     String nume;
-    int formatieDeStudiu;
+    String formatieDeStudiu;
 
-    public Student(int numarMatricol,String prenume,String nume,int formatieDeStudiu)
+    public Student(int numarMatricol,String prenume,String nume,String  formatieDeStudiu)
     {
         this.numarMatricol=numarMatricol;
         this.prenume=prenume;
@@ -24,4 +24,7 @@ public class Student
                ", formatieDeStudiu=" + formatieDeStudiu +
                '}';
     }
+
+
+
 }
