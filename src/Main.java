@@ -16,6 +16,8 @@ void main() {
    }
    Student cautat1 = new Student(120, "Alis", "Popa", "TI21/2");
    System.out.println("\nEste prezent Alis Popa? " + estePrezent(listaStudenti, cautat1));
+   Student cautat2  = new Student(112, "Maria", "Popa", "TI21/1");
+   System.out.println("Este prezent Maria Popa? " + estePrezent(listaStudenti, cautat2));
    Set<Student> setStudenti = new HashSet<>(listaStudenti);
 }
 public static boolean estePrezent(List<Student> listaStudenti, Student s) {
