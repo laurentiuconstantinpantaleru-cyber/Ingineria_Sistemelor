@@ -14,13 +14,12 @@ void main() {
    for (Student s : listaStudenti) {
       System.out.println(s);
    }
-   Student cautat1 = new Student(120, "Alis", "Popa", "TI21/2");
-   System.out.println("\nEste prezent Alis Popa? " + estePrezent(listaStudenti, cautat1));
+   Student cautat1 = new Student(10_, "Alis", "Popa", "TI21/2");
+   System.out.println("\nEste prezent Alis Popa? " + listaStudenti.contains(cautat1));
    Student cautat2  = new Student(112, "Maria", "Popa", "TI21/1");
-   System.out.println("Este prezent Maria Popa? " + estePrezent(listaStudenti, cautat2));
+   System.out.println("Este prezent Maria Popa? " + listaStudenti.contains( cautat2));
+
+   System.out.println(cautat1.hashCode());
    Set<Student> setStudenti = new HashSet<>(listaStudenti);
 }
-public static boolean estePrezent(List<Student> listaStudenti, Student s) {
-   // Metoda contains folosește intern metoda equals() definită în clasa Student
-   return listaStudenti.contains(s);
-}
+
