@@ -16,6 +16,22 @@ public class Student
 
     }
 
+    public Student(String linieDinFisier){
+        String[] bucati=linieDinFisier.split(",");
+        this.numarMatricol=Integer.parseInt(bucati[0].trim());
+        this.nume=bucati[1].trim();
+        this.prenume=bucati[2].trim();
+        this.formatieDeStudiu=bucati[3].trim();
+    }
+
+    public String getNume() {
+        return nume;
+    }
+
+    public String getFormatieDeStudiu() {
+        return formatieDeStudiu;
+    }
+
     @Override
   public String toString()
     {

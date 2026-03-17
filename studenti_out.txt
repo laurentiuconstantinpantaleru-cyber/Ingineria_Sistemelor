@@ -1,0 +1,6 @@
+Student{numarMatricol=1026, prenume='Prodan', nume='Anamaria', formatieDeStudiu=TI131/1}
+Student{numarMatricol=1025, prenume='Popa', nume='Andrei', formatieDeStudiu=ISM141/2}
+Student{numarMatricol=1026, prenume='Popescu', nume='Bianca', formatieDeStudiu=TI131/2}
+Student{numarMatricol=1024, prenume='Mihalcea', nume='Ioan', formatieDeStudiu=ISM141/1}
+Student{numarMatricol=1028, prenume='Ionescu', nume='Mihai', formatieDeStudiu=TI132/2}
+Student{numarMatricol=1027, prenume='Mohanu', nume='Paul', formatieDeStudiu=TI132/1}
