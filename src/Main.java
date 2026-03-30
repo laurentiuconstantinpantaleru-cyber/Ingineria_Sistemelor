@@ -2,10 +2,21 @@ import java.util.List;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
 
 void main() {
    try
    {
+       Map<Integer, Student> tineri = new HashMap<>();
+       tineri.put(1, new Student(589, "Bianca", "Popescu", "ISM21/2", 9));
+       tineri.put(2, new Student(120, "Ioan", "Popa", "TI21/2", 8));
+
+       float notaM = Student.gasesteNota("Bianca", "Popescu", tineri);
+       float notaN1 = Student.gasesteNota("Ioan", "Popa", tineri);
+
+       System.out.println("Nota Bianca Popescu: " + notaM);
+       System.out.println("Nota Ioan Popa: " + notaN1);
+
 List<String> Lista=Files.readAllLines(Paths.get("studenti_in.txt"));
 List<Student> studenti= new ArrayList<>();
 List<String> liniiSortate = new ArrayList<>();
@@ -23,10 +34,12 @@ for(String s : Lista)
 
       for (Student s : studenti) liniiSortate1.add(s.toString());
       Files.write(Paths.get("studenti_out_sorted.txt"), liniiSortate1);
+
+
    }
 
    catch (IOException e) {
-      System.out.println("Eroare: Nu am putut citi fisierul! " );
+      System.out.println("Eroare" );
    }
    /*Student s1 = new Student(589, "laur", "pantaleru", "ISM21/2");
    Student s2 = new Student(120, "Alis", "Popa", "TI21/2");

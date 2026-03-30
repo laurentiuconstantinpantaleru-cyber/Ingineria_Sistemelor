@@ -1,4 +1,6 @@
+import java.util.Map;
 import java.util.Objects;
+import java.util.HashMap;
 
 public class Student
 {
@@ -6,14 +8,32 @@ public class Student
     String prenume;
     String nume;
     String formatieDeStudiu;
+    int nota;
 
-    public Student(int numarMatricol,String prenume,String nume,String  formatieDeStudiu)
+    public Student(int numarMatricol,String prenume,String nume,String  formatieDeStudiu,int nota)
     {
         this.numarMatricol=numarMatricol;
         this.prenume=prenume;
          this.nume=nume;
         this.formatieDeStudiu=formatieDeStudiu;
+        this.nota=nota;
 
+    }
+
+    public static float gasesteNota(String prenume, String nume, Map<?, ?> tineri) {
+        Map<String, Float> indexRapid = new HashMap<>();
+
+        for (Object valoare : tineri.values()) {
+            if (valoare instanceof Student s) {
+                String cheie = s.prenume + "-" + s.nume;
+                indexRapid.put(cheie, (float) s.nota);
+            }
+        }
+
+        String cheieCautata = prenume + "-" + nume;
+
+
+        return indexRapid.getOrDefault(cheieCautata, 0.0f);
     }
 
     public Student(String linieDinFisier){
@@ -24,12 +44,19 @@ public class Student
         this.formatieDeStudiu=bucati[3].trim();
     }
 
+public int getNota(){
+        return this.nota;
+}
     public String getNume() {
-        return nume;
+        return this.nume;
     }
 
     public String getFormatieDeStudiu() {
-        return formatieDeStudiu;
+        return this.formatieDeStudiu;
+    }
+
+    public String getPrenume() {
+        return this.prenume;
     }
 
     @Override
