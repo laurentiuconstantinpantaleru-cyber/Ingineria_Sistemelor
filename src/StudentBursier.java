@@ -15,7 +15,9 @@ public class StudentBursier extends Student {
         if (!super.equals(o)) return false;
         return Double.compare(that.cuantumBursa, cuantumBursa) == 0;
     }
-
+    public double getCuantumBursa() {
+        return cuantumBursa;
+    }
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), cuantumBursa);
