@@ -1,68 +1,40 @@
 import java.util.List;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.HashMap;
-
+import java.util.ArrayList;
 void main() {
 
-   try
-   {
-       List<StudentBursier> bursieri = new ArrayList<>();
+    List<Student> listaInitiala = new ArrayList<>();
+    listaInitiala.add(new Student(1, "Bianca", "Popescu", "Initiala", 9));
+    listaInitiala.add(new Student(2, "Ioan", "Popa", "Initiala", 8));
+    listaInitiala.add(new Student(3, "Andrei", "Muresan", "Initiala", 10));
+    listaInitiala.add(new Student(4, "Elena", "Dinu", "Initiala", 7));
+    listaInitiala.add(new Student(5, "Matei", "Radu", "Initiala", 9));
+    int mijloc = (listaInitiala.size() + 1) / 2;
+    List<Student> listaNoua = new ArrayList<>();
 
-       bursieri.add(new StudentBursier(1025, "Andrei", "Popa", "ISM141/2", 8.70, 725.50));
-       bursieri.add(new StudentBursier(1024, "Ioan", "Mihalcea", "ISM141/1", 9.80, 801.10));
-       bursieri.add(new StudentBursier(1026, "Anamaria", "Prodan", "TI131/1", 8.90, 745.50));
-       bursieri.add(new StudentBursier(1029, "Bianca", "Popescu", "TI131/1", 9.10, 780.80));
-
-       // Salvare în fișier folosind metoda definită
-       salveazaInFisier("bursieri_out.txt", bursieri);
-       Map<Integer, Student> tineri = new HashMap<>();
-       tineri.put(1, new Student(589, "Bianca", "Popescu", "ISM21/2", 9));
-       tineri.put(2, new Student(120, "Ioan", "Popa", "TI21/2", 8));
-
-       float nota1 = Student.gasesteNota("Bianca", "Popescu", tineri);
-       float nota2 = Student.gasesteNota("Ioan", "Popa", tineri);
-
-       System.out.println("Nota Bianca Popescu: " + nota1);
-       System.out.println("Nota Ioan Popa: " + nota2);
-
-List<String> Lista=Files.readAllLines(Paths.get("studenti_in.txt"));
-List<Student> studenti= new ArrayList<>();
-List<String> liniiSortate = new ArrayList<>();
-List<String> liniiSortate1 = new ArrayList<>();
-for(String s : Lista)
-{
-   studenti.add(new Student(s));
-}
-      studenti.sort(Comparator.comparing((Student s) -> s.nume));
-
-        for (Student s : studenti) liniiSortate.add(s.toString());
-      Files.write(Paths.get("studenti_out.txt"), liniiSortate);
-
-      studenti.sort(Comparator.comparing((Student s) -> s.formatieDeStudiu).thenComparing(s -> s.nume));
-
-      for (Student s : studenti) liniiSortate1.add(s.toString());
-      Files.write(Paths.get("studenti_out_sorted.txt"), liniiSortate1);
-
-
-   }
-
-   catch (IOException e) {
-      System.out.println("Eroare" );
-   }
-
-
-}
-public static void salveazaInFisier(String numeFisier, List<? extends Student> lista) {
-    List<String> linii = new ArrayList<>();
-    for (Student s : lista) {
-        linii.add(s.toString());
+    for (int i = 0; i < listaInitiala.size(); i++) {
+        Student s = listaInitiala.get(i);
+        if (i < mijloc) {
+            // Primii studenti merg in Grupa 1
+            listaNoua.add(s.mutaInFormatie("Grupa_1"));
+        } else {
+            // Restul merg in Grupa 2
+            listaNoua.add(s.mutaInFormatie("Grupa_2"));
+        }
     }
-    try {
-        Files.write(Paths.get(numeFisier), linii);
-        System.out.println("Fișierul " + numeFisier + " a fost salvat cu succes.");
-    } catch (IOException e) {
-        System.err.println("Eroare la scrierea în fișier: " + e.getMessage());
-    }
+    System.out.println("--- Noua lista de studenti (Imutabili) ---");
+    listaNoua.forEach(System.out::println);
+
+    // 1. Creare lista de studenti
+    List<Student> studenti = new ArrayList<>();
+    studenti.add(new Student(101, "Ion", "Popescu", "311AC", 9));
+    studenti.add(new Student(102, "Maria", "Ionescu", "311AC", 10));
+
+    // 2. Apel EXPORT
+    Student.exportToExcel(studenti, "laborator8_students.xls");
+
+    // 3. Apel IMPORT
+    List<Student> listaCitita = Student.importFromExcel("laborator8_students.xls");
+
+    System.out.println("Studenti cititi din fisier:");
+    listaCitita.forEach(System.out::println);
 }
