@@ -1,0 +1,4 @@
+Student{numarMatricol=1025, prenume='Andrei', nume='Popa', formatieDeStudiu=ISM141/2, cuantumBursa=725.5}
+Student{numarMatricol=1024, prenume='Ioan', nume='Mihalcea', formatieDeStudiu=ISM141/1, cuantumBursa=801.1}
+Student{numarMatricol=1026, prenume='Anamaria', nume='Prodan', formatieDeStudiu=TI131/1, cuantumBursa=745.5}
+Student{numarMatricol=1029, prenume='Bianca', nume='Popescu', formatieDeStudiu=TI131/1, cuantumBursa=780.8}
