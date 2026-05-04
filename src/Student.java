@@ -1,33 +1,88 @@
+import java.util.Map;
+import java.util.Objects;
+import java.util.HashMap;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import java.io.*;
 import java.util.*;
+public class Student
+{
+    int numarMatricol;
+    String prenume;
+    String nume;
+    String formatieDeStudiu;
+    int nota;
 
-public final class Student {
-    private final int numarMatricol;
-    private final String prenume;
-    private final String nume;
-    private final String formatieDeStudiu;
-    private final int nota;
+    public Student(int numarMatricol,String prenume,String nume,String  formatieDeStudiu,int nota)
+    {
+        this.numarMatricol=numarMatricol;
+        this.prenume=prenume;
+         this.nume=nume;
+        this.formatieDeStudiu=formatieDeStudiu;
+        this.nota=nota;
 
-    public Student(int numarMatricol, String prenume, String nume, String formatieDeStudiu, int nota) {
-        this.numarMatricol = numarMatricol;
-        this.prenume = prenume;
-        this.nume = nume;
-        this.formatieDeStudiu = formatieDeStudiu;
-        this.nota = nota;
     }
 
-    public Student(String linieDinFisier) {
-        String[] bucati = linieDinFisier.split(",");
-        this.numarMatricol = Integer.parseInt(bucati[0].trim());
-        this.nume = bucati[1].trim();
-        this.prenume = bucati[2].trim();
-        this.formatieDeStudiu = bucati[3].trim();
-        this.nota = 0;
+    public static float gasesteNota(String prenume, String nume, Map<?, ?> tineri) {
+        Map<String, Float> indexRapid = new HashMap<>();
+
+        for (Object valoare : tineri.values()) {
+            if (valoare instanceof Student s) {
+                String cheie = s.prenume + "-" + s.nume;
+                indexRapid.put(cheie, (float) s.nota);
+            }
+        }
+
+        String cheieCautata = prenume + "-" + nume;
+
+
+        return indexRapid.getOrDefault(cheieCautata, 0.0f);
     }
 
-    // 8.5.4 a) Metoda pentru EXPORT (scrie lista in .xls)
+    public Student(String linieDinFisier){
+        String[] bucati=linieDinFisier.split(",");
+        this.numarMatricol=Integer.parseInt(bucati[0].trim());
+        this.nume=bucati[1].trim();
+        this.prenume=bucati[2].trim();
+        this.formatieDeStudiu=bucati[3].trim();
+    }
+
+
+    public String getFormatieDeStudiu() {
+        return this.formatieDeStudiu;
+    }
+
+    public String getPrenume() {
+        return this.prenume;
+    }
+
+    @Override
+  public String toString()
+    {
+        return "Student{" +
+               "numarMatricol=" + numarMatricol +
+               ", prenume='" + prenume + '\'' +
+                ", nume='" + nume + '\'' +
+               ", formatieDeStudiu=" + formatieDeStudiu +
+               '}';
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(numarMatricol,student.numarMatricol)&&
+                Objects.equals(nume, student.nume) &&
+                Objects.equals(prenume, student.prenume) &&
+                Objects.equals(formatieDeStudiu, student.formatieDeStudiu);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numarMatricol,nume, prenume,  formatieDeStudiu);
+    }
     public static void exportToExcel(List<Student> studenti, String fileName) {
         try (Workbook workbook = new HSSFWorkbook()) { // HSSFWorkbook pentru format .xls
             Sheet sheet = workbook.createSheet("Studenti");
@@ -92,29 +147,5 @@ public final class Student {
     // Metodele existente ...
     public Student mutaInFormatie(String nouaFormatie) {
         return new Student(this.numarMatricol, this.prenume, this.nume, nouaFormatie, this.nota);
-    }
-
-    public int getNota() { return this.nota; }
-    public String getNume() { return this.nume; }
-    public String getFormatieDeStudiu() { return this.formatieDeStudiu; }
-    public String getPrenume() { return this.prenume; }
-    public int getNumarMatricol() { return this.numarMatricol; }
-
-    @Override
-    public String toString() {
-        return "Student{" + "matr=" + numarMatricol + ", nume='" + nume + '\'' + ", prenume='" + prenume + '\'' + ", grupa='" + formatieDeStudiu + '\'' + ", nota=" + nota + '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Student student = (Student) o;
-        return numarMatricol == student.numarMatricol && Objects.equals(nume, student.nume) && Objects.equals(prenume, student.prenume) && Objects.equals(formatieDeStudiu, student.formatieDeStudiu);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(numarMatricol, nume, prenume, formatieDeStudiu);
     }
 }
