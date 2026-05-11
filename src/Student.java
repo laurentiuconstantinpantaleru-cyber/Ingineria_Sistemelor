@@ -11,9 +11,9 @@ public class Student
     String prenume;
     String nume;
     String formatieDeStudiu;
-    int nota;
+    double  nota;
 
-    public Student(int numarMatricol,String prenume,String nume,String  formatieDeStudiu,int nota)
+    public Student(int numarMatricol,String prenume,String nume,String  formatieDeStudiu,double  nota)
     {
         this.numarMatricol=numarMatricol;
         this.prenume=prenume;
